@@ -54,7 +54,7 @@ export default function Home() {
           {/* Call to Actions using the brand colors */}
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <a
-              href="#"
+              href="#contact"
               className="rounded-md bg-coral px-8 py-3.5 text-base font-bold text-white shadow-md hover:bg-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral transition-all duration-300 transform hover:-translate-y-1"
             >
               Book a Dive
@@ -158,11 +158,71 @@ export default function Home() {
                   Ran over a crab trap line? Dropped keys off the dock? As a locally based Lake Worth operation, we offer rapid dispatch for underwater recovery and entanglement removal.
                 </dd>
               </div>
-
             </dl>
           </div>
         </div>
       </div>
+      {/* Footer & Lead Capture Section */}
+      <footer className="bg-navy text-white py-16 mt-20" id="contact">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24">
+            
+            {/* Local SEO & Contact Column */}
+            <div>
+              <div className="text-2xl font-black tracking-tight text-white mb-6">
+                <span className="text-coral">CORAL</span> SHIELD <span className="text-teal font-medium text-lg ml-2">MARINE</span>
+              </div>
+              <p className="text-light/80 mb-8 max-w-sm leading-relaxed">
+                Premium underwater hull cleaning, zinc replacement, and running gear defense for Palm Beach County's most discerning boat owners. 100% Owner-Operator.
+              </p>
+              
+              <div className="space-y-4 text-light/90 font-medium">
+                <div className="flex items-center gap-4">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-teal/20">
+                    <svg className="h-5 w-5 text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                  </div>
+                  Lake Worth, FL (Serving Palm Beach County)
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-teal/20">
+                    <svg className="h-5 w-5 text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                  </div>
+                  <a href="tel:5616797240" className="hover:text-coral transition-colors">(561) 679-7240</a>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Lead Capture Form */}
+            <div className="bg-white/5 p-8 rounded-2xl border border-white/10 shadow-xl">
+              <h3 className="text-xl font-bold mb-6 text-white">Request a Dive Quote</h3>
+              <form action="https://formspree.io/f/mwlpwydy" method="POST" className="space-y-4">
+              {/* This hidden input forces Formspree to redirect them right back to your site after clicking send */}
+                <input type="hidden" name="_next" value="http://localhost:3000" />
+                <div>
+                  <input type="text" name="boat_details" required placeholder="Boat Length & Make (e.g., 40' Sea Ray)" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3.5 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent transition-all" />
+                </div>
+                <div>
+                  <input type="text" name="marina_location" required placeholder="Marina Name or Slip Number" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3.5 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent transition-all" />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <input type="text" name="client_name" required placeholder="Your Name" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3.5 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent transition-all" />
+                  <input type="tel" name="phone_number" required placeholder="Phone Number" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3.5 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent transition-all" />
+                </div>
+                {/* Optional hidden field to redirect them to a "Thank You" page later, or leave out to use Formspree's default success page */}
+                <button type="submit" className="w-full bg-coral hover:bg-teal transition-all duration-300 transform hover:-translate-y-1 text-white font-bold py-4 px-4 rounded-lg mt-4 shadow-lg">
+                  Send Request
+                </button>
+              </form>
+            </div>
+            
+          </div>
+          
+          <div className="mt-16 pt-8 border-t border-white/10 text-center text-sm font-medium text-light/40 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p>&copy; {new Date().getFullYear()} Coral Shield Marine LLC. All rights reserved.</p>
+            <p>Fully Insured Commercial Divers.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
