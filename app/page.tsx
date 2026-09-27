@@ -1,65 +1,169 @@
-import Image from "next/image";
+import React from 'react';
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="bg-white min-h-screen font-sans">
+      {/* Navigation Bar */}
+      <header className="absolute inset-x-0 top-0 z-50 bg-white shadow-sm">
+        <nav className="flex items-center justify-between p-6 lg:px-8 max-w-7xl mx-auto" aria-label="Global">
+          <div className="flex lg:flex-1">
+            <a href="#" className="-m-1.5 p-1.5 flex items-center gap-2">
+              <span className="sr-only">Coral Shield Marine</span>
+              {/* You will replace this text with your actual logo image later */}
+              <div className="text-2xl font-black tracking-tight text-navy">
+                <span className="text-coral">CORAL</span> SHIELD
+              </div>
+            </a>
+          </div>
+          <div className="hidden lg:flex lg:gap-x-12">
+            <a href="#" className="text-sm font-semibold leading-6 text-navy hover:text-teal transition-colors">Services</a>
+            <a href="#" className="text-sm font-semibold leading-6 text-navy hover:text-teal transition-colors">Our Process</a>
+            <a href="#" className="text-sm font-semibold leading-6 text-navy hover:text-teal transition-colors">Service Area</a>
+          </div>
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            <a href="#" className="text-sm font-bold leading-6 text-navy hover:text-teal transition-colors">
+              Dockmaster Portal <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </nav>
+      </header>
+
+      {/* Hero Section */}
+      <div className="relative isolate px-6 pt-24 lg:px-8 bg-light pb-20">
+        <div className="mx-auto max-w-4xl py-32 sm:py-40 lg:py-48 text-center">
+          
+          {/* Trust Badge / Credentials */}
+          <div className="hidden sm:mb-8 sm:flex sm:justify-center">
+            <div className="relative rounded-full px-4 py-1.5 text-sm leading-6 text-navy ring-1 ring-navy/20 hover:ring-navy/40 font-semibold bg-white shadow-sm">
+              Fully Insured Commercial Divers • Serving Palm Beach County
+            </div>
+          </div>
+          
+          {/* Main Headline */}
+          <h1 className="text-4xl font-bold tracking-tight text-navy sm:text-6xl">
+            Premium Underwater Hull Cleaning & Marine Defense
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          
+          {/* Subheadline focusing on ROI & Owner-Operator */}
+          <p className="mt-6 text-lg leading-8 text-navy max-w-2xl mx-auto font-medium">
+            Restore your vessel's speed and drastically reduce fuel consumption. 
+            As an exclusive owner-operator service, only licensed, insured professionals 
+            touch your expensive bottom paint. No subcontractors.
           </p>
+          
+          {/* Call to Actions using the brand colors */}
+          <div className="mt-10 flex items-center justify-center gap-x-6">
+            <a
+              href="#"
+              className="rounded-md bg-coral px-8 py-3.5 text-base font-bold text-white shadow-md hover:bg-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral transition-all duration-300 transform hover:-translate-y-1"
+            >
+              Book a Dive
+            </a>
+            <a href="#" className="text-base font-bold leading-6 text-navy hover:text-teal flex items-center gap-2 transition-colors">
+              View Pricing & Services <span aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </div>
+
+      {/* Quick Visual Proof / Services Banner */}
+      <div className="bg-navy py-12 border-t-4 border-coral">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center flex flex-col sm:flex-row justify-around gap-8">
+          <div>
+            <h3 className="text-white font-bold text-xl">Drag Reduction</h3>
+            <p className="text-teal font-medium text-sm mt-1">Maximized Fuel ROI</p>
+          </div>
+          <div>
+            <h3 className="text-white font-bold text-xl">Zinc Replacement</h3>
+            <p className="text-teal font-medium text-sm mt-1">Corrosion Defense</p>
+          </div>
+          <div>
+            <h3 className="text-white font-bold text-xl">Propeller Polishing</h3>
+            <p className="text-teal font-medium text-sm mt-1">Restored RPMs</p>
+          </div>
         </div>
-      </main>
+      </div>
+
+      {/* Services Grid Section */}
+      <div className="bg-white py-24 sm:py-32" id="services">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl lg:text-center">
+            <h2 className="text-base font-semibold leading-7 text-teal">Premium Defense</h2>
+            <p className="mt-2 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
+              Complete Underwater Asset Protection
+            </p>
+            <p className="mt-6 text-lg leading-8 text-navy/80">
+              We don't just scrub boats; we maximize your vessel's fuel efficiency and protect your running gear from catastrophic galvanic corrosion. 100% Owner-Operator guaranteed.
+            </p>
+          </div>
+          <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
+            <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
+              
+              {/* Service 1 */}
+              <div className="relative pl-16">
+                <dt className="text-base font-bold leading-7 text-navy">
+                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-coral shadow-sm">
+                    <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  Recurring Hull Maintenance
+                </dt>
+                <dd className="mt-2 text-base leading-7 text-navy/70">
+                  Starting at <span className="font-bold text-navy">$3.00/ft</span>. We remove heavy waterline rings and marine growth using non-abrasive tools to protect your expensive bottom paint and restore top speed.
+                </dd>
+              </div>
+
+              {/* Service 2 */}
+              <div className="relative pl-16">
+                <dt className="text-base font-bold leading-7 text-navy">
+                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-teal shadow-sm">
+                    <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.492-3.053c.24-.294.416-.634.52-1.002L15 9l-3-3-2.128.583a2.714 2.714 0 00-1.002.52l-3.053 2.492M11.42 15.17l-3.28 3.28M9 15l-3 3m0 0l-3-3m3 3V9" />
+                    </svg>
+                  </div>
+                  Zinc Anode Replacement
+                </dt>
+                <dd className="mt-2 text-base leading-7 text-navy/70">
+                  Protect your bronze propellers and stainless shafts from saltwater corrosion. We carry a full inventory of shaft, collar, and trim-tab zincs for immediate underwater installation.
+                </dd>
+              </div>
+
+              {/* Service 3 */}
+              <div className="relative pl-16">
+                <dt className="text-base font-bold leading-7 text-navy">
+                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-teal shadow-sm">
+                    <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                    </svg>
+                  </div>
+                  Propeller Polishing
+                </dt>
+                <dd className="mt-2 text-base leading-7 text-navy/70">
+                  Fouled props cause massive fuel loss. We polish bronze running gear to a mirror shine to maximize your RPMs and increase fuel efficiency.
+                </dd>
+              </div>
+
+              {/* Service 4 */}
+              <div className="relative pl-16">
+                <dt className="text-base font-bold leading-7 text-navy">
+                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-coral shadow-sm">
+                    <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                  </div>
+                  Entanglement & Emergency Recovery
+                </dt>
+                <dd className="mt-2 text-base leading-7 text-navy/70">
+                  Ran over a crab trap line? Dropped keys off the dock? As a locally based Lake Worth operation, we offer rapid dispatch for underwater recovery and entanglement removal.
+                </dd>
+              </div>
+
+            </dl>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
+//I one hundred percent did this
