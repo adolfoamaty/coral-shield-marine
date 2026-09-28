@@ -1,6 +1,8 @@
-import React from 'react';
+"use client";
+import React, { useState } from 'react';
 
 export default function Home() {
+  const [btnState, setBtnState] = useState({ text: 'Send Request', status: 'idle' });
   return (
     <div className="bg-white min-h-screen font-sans">
       {/* Navigation Bar */}
@@ -162,6 +164,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+
       {/* Footer & Lead Capture Section */}
       <footer className="bg-navy text-white py-16 mt-20" id="contact">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -195,30 +198,74 @@ export default function Home() {
             {/* Quick Lead Capture Form */}
             <div className="bg-white/5 p-8 rounded-2xl border border-white/10 shadow-xl">
               <h3 className="text-xl font-bold mb-6 text-white">Request a Dive Quote</h3>
-              <form action="https://formspree.io/f/mwlpwydy" method="POST" className="space-y-4">
-              {/* This hidden input forces Formspree to redirect them right back to your site after clicking send */}
-                <input type="hidden" name="_next" value="http://localhost:3000" />
+              <form 
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  const form = e.target;
+                  setBtnState({ text: 'Sending...', status: 'loading' });
+
+                  const data = {
+                    boat_details: form.boat_details.value,
+                    marina_location: form.marina_location.value,
+                    client_name: form.client_name.value,
+                    client_email: form.client_email.value,
+                    phone_number: form.phone_number.value,
+                  };
+
+                  try {
+                    const response = await fetch('/api/contact', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify(data),
+                    });
+
+                    if (response.ok) {
+                      setBtnState({ text: '✓ Request Sent Successfully', status: 'success' });
+                      form.reset();
+                    } else {
+                      setBtnState({ text: 'Error. Try Again.', status: 'error' });
+                    }
+                  } catch (error) {
+                    setBtnState({ text: 'Error. Try Again.', status: 'error' });
+                  }
+                }}
+                className="space-y-4"
+              >
                 <div>
                   <input type="text" name="boat_details" required placeholder="Boat Length & Make (e.g., 40' Sea Ray)" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3.5 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent transition-all" />
                 </div>
                 <div>
                   <input type="text" name="marina_location" required placeholder="Marina Name or Slip Number" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3.5 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent transition-all" />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <input type="text" name="client_name" required placeholder="Your Name" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3.5 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent transition-all" />
+                  <input type="email" name="client_email" required placeholder="Email Address" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3.5 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent transition-all" />
+                </div>
+                <div>
                   <input type="tel" name="phone_number" required placeholder="Phone Number" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3.5 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent transition-all" />
                 </div>
-                {/* Optional hidden field to redirect them to a "Thank You" page later, or leave out to use Formspree's default success page */}
-                <button type="submit" className="w-full bg-coral hover:bg-teal transition-all duration-300 transform hover:-translate-y-1 text-white font-bold py-4 px-4 rounded-lg mt-4 shadow-lg">
-                  Send Request
+                
+                <button 
+                  type="submit" 
+                  disabled={btnState.status === 'loading' || btnState.status === 'success'}
+                  className={`w-full font-bold py-4 px-4 rounded-lg mt-4 shadow-lg transition-all duration-300 transform ${
+                    btnState.status === 'success' 
+                      ? 'bg-green-500 text-white cursor-default' 
+                      : 'bg-coral hover:bg-teal text-white hover:-translate-y-1'
+                  }`}
+                >
+                  {btnState.text}
                 </button>
               </form>
             </div>
-            
           </div>
-          
+
           <div className="mt-16 pt-8 border-t border-white/10 text-center text-sm font-medium text-light/40 flex flex-col sm:flex-row justify-between items-center gap-4">
             <p>&copy; {new Date().getFullYear()} Coral Shield Marine LLC. All rights reserved.</p>
+            <div className="flex space-x-6">
+              <a href="/privacy" className="hover:text-teal transition-colors">Privacy Policy</a>
+              <a href="/terms" className="hover:text-teal transition-colors">Terms of Service</a>
+            </div>
             <p>Fully Insured Commercial Divers.</p>
           </div>
         </div>
@@ -226,4 +273,3 @@ export default function Home() {
     </div>
   );
 }
-//I one hundred percent did this
