@@ -10,7 +10,7 @@ export default function Home() {
         <nav className="flex items-center justify-between p-6 lg:px-8 max-w-7xl mx-auto" aria-label="Global">
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5 flex items-center gap-2">
-              <span className="sr-only">Coral Shield Marine</span>
+              <img src="/logo.png" alt="Coral Shield Marine Logo" className="h-10 w-auto" />
               {/* You will replace this text with your actual logo image later */}
               <div className="text-2xl font-black tracking-tight text-navy">
                 <span className="text-coral">CORAL</span> SHIELD
@@ -67,12 +67,67 @@ export default function Home() {
           </div>
         </div>
       </div>
+      {/* Visual Proof / Before & After Section */}
+      <div className="bg-navy py-24 sm:py-32 border-y-4 border-coral">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl lg:text-center mb-16">
+            <h2 className="text-base font-semibold leading-7 text-teal">Photographic Proof</h2>
+            <p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              Don't Guess. See the Results.
+            </p>
+            <p className="mt-6 text-lg leading-8 text-light/80">
+              We provide high-resolution post-dive photos after every service so you can visually verify your clean running gear and exact zinc anode depletion levels.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {/* Before / After Card 1 */}
+            <div className="rounded-2xl overflow-hidden bg-white/5 border border-white/10 shadow-2xl">
+              <div className="grid grid-cols-2">
+                <div className="h-64 bg-slate-800 relative flex items-center justify-center">
+                  <span className="absolute top-4 left-4 bg-coral text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide z-10">Before</span>
+                  {/* Replace with your dirty prop image */}
+                  <p className="text-white/30 text-sm font-medium">Fouled Propeller</p>
+                </div>
+                <div className="h-64 bg-slate-700 relative flex items-center justify-center border-l border-white/10">
+                  <span className="absolute top-4 left-4 bg-teal text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide z-10">After</span>
+                  {/* Replace with your polished bronze prop image */}
+                  <p className="text-white/30 text-sm font-medium">Polished Bronze</p>
+                </div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-lg font-bold text-white mb-2">Propeller Polishing</h3>
+                <p className="text-light/70 text-sm">Removing hard growth from running gear instantly restores lost RPMs and stops excess fuel burn.</p>
+              </div>
+            </div>
 
+            {/* Before / After Card 2 */}
+            <div className="rounded-2xl overflow-hidden bg-white/5 border border-white/10 shadow-2xl">
+              <div className="grid grid-cols-2">
+                <div className="h-64 bg-slate-800 relative flex items-center justify-center">
+                  <span className="absolute top-4 left-4 bg-coral text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide z-10">Depleted</span>
+                  {/* Replace with your corroded zinc image */}
+                  <p className="text-white/30 text-sm font-medium">Corroded Anode</p>
+                </div>
+                <div className="h-64 bg-slate-700 relative flex items-center justify-center border-l border-white/10">
+                  <span className="absolute top-4 left-4 bg-teal text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide z-10">Protected</span>
+                  {/* Replace with your new zinc image */}
+                  <p className="text-white/30 text-sm font-medium">New Installation</p>
+                </div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-lg font-bold text-white mb-2">Zinc Anode Replacement</h3>
+                <p className="text-light/70 text-sm">We document your zinc depletion and install fresh anodes to shield your expensive underwater metals from galvanic corrosion.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       {/* Quick Visual Proof / Services Banner */}
       <div className="bg-navy py-12 border-t-4 border-coral">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center flex flex-col sm:flex-row justify-around gap-8">
           <div>
-            <h3 className="text-white font-bold text-xl">Drag Reduction</h3>
+            <h3 className="text-white font-bold text-xl">Hull Cleaning</h3>
             <p className="text-teal font-medium text-sm mt-1">Maximized Fuel ROI</p>
           </div>
           <div>

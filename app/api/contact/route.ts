@@ -11,7 +11,7 @@ export async function POST(request: Request) {
 
     // 1. Send the Lead Notification to YOUR Inbox
     await resend.emails.send({
-      from: 'Coral Shield Marine <benedicto@coralshieldmarine.com>',
+      from: 'Coral Shield System <quotes@coralshieldmarine.com>', // Updated!
       to: 'benedicto@coralshieldmarine.com',
       subject: `🚨 New Dive Quote: ${boat_details}`,
       html: `
@@ -26,7 +26,7 @@ export async function POST(request: Request) {
 
     // 2. Send the Premium Auto-Responder to the CLIENT
     await resend.emails.send({
-      from: 'Coral Shield Marine <onboarding@resend.dev>', // We will update this to your domain later
+      from: 'Coral Shield Marine <quotes@coralshieldmarine.com>', // Updated!
       to: client_email,
       subject: 'Dive Quote Received - Coral Shield Marine',
       html: `
