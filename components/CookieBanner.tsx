@@ -20,23 +20,26 @@ export default function CookieBanner() {
   if (!showBanner) return null;
 
   return (
-    <div className="fixed bottom-0 inset-x-0 pb-2 sm:pb-5 z-50">
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div className="rounded-lg bg-navy p-2 shadow-xl sm:p-3 border border-teal/20">
-          <div className="flex flex-wrap items-center justify-between">
-            <div className="flex w-0 flex-1 items-center">
-              <p className="ml-3 truncate font-medium text-white text-sm">
-                We use strictly necessary cookies to ensure our website functions securely. By continuing, you agree to our <a href="/privacy" className="underline text-teal hover:text-coral">Privacy Policy</a>.
+    <div className="fixed bottom-0 inset-x-0 pb-4 sm:pb-5 z-50">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="rounded-xl bg-navy p-4 shadow-2xl border border-teal/20">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            
+            <div className="flex-1">
+              <p className="font-medium text-white text-sm text-center sm:text-left leading-relaxed">
+                We use strictly necessary cookies to ensure our website functions securely. By continuing, you agree to our <a href="/privacy" className="underline text-teal hover:text-coral transition-colors">Privacy Policy</a>.
               </p>
             </div>
-            <div className="order-3 mt-2 w-full flex-shrink-0 sm:order-2 sm:mt-0 sm:w-auto">
+            
+            <div className="w-full sm:w-auto flex-shrink-0">
               <button
                 onClick={acceptCookies}
-                className="flex items-center justify-center rounded-md border border-transparent bg-coral px-4 py-2 text-sm font-bold text-white hover:bg-teal transition-colors"
+                className="w-full sm:w-auto flex items-center justify-center rounded-lg bg-coral px-8 py-2.5 text-sm font-bold text-white hover:bg-teal transition-all shadow-md"
               >
                 Got it
               </button>
             </div>
+            
           </div>
         </div>
       </div>
