@@ -17,16 +17,20 @@ function load(file, mocks = {}) {
   return m.exports;
 }
 const helpers = load('lib/contact.ts');
+const template = load('lib/confirmation-email.ts', { './contact': helpers });
 const sent = []; let failure = '';
+const logged = [];
+const originalConsoleError = console.error;
 class ResendStub {
   constructor() { this.emails = { send: async message => {
     sent.push(message);
     if (failure === 'notification' && sent.length === 1) return { error: { message: 'test failure' } };
+    if (failure === 'receipt-error' && sent.length === 2) return { error: { name: 'validation_error', statusCode: 401 } };
     if (failure === 'receipt' && sent.length === 2) throw new Error('test receipt failure');
     return { data: { id: 'mock-id' }, error: null };
   } }; }
 }
-const { POST } = load('app/api/contact/route.ts', { resend: { Resend: ResendStub }, '@/lib/contact': helpers });
+const { POST } = load('app/api/contact/route.ts', { resend: { Resend: ResendStub }, '@/lib/contact': helpers, '@/lib/confirmation-email': template });
 const valid = { boat_details: '40 ft Sea Ray', marina_location: 'Test marina', client_name: 'Test owner', phone_number: '5615550123', client_email: 'test@example.com', service: 'hull-cleaning', notes: '' };
 async function request(body, raw = false) {
   sent.length = 0;
@@ -38,6 +42,7 @@ async function request(body, raw = false) {
     delete process.env.RESEND_API_KEY;
     assert.equal((await request(valid)).status, 503);
     process.env.RESEND_API_KEY = 'test-stub-key';
+    console.error = (...args) => logged.push(args);
     assert.equal((await request('{invalid', true)).status, 400);
     assert.equal((await request('x'.repeat(12001), true)).status, 413);
     for (const body of [null, [], {}, {...valid, client_email:'test@example.com\r\nInjected'}, {...valid, phone_number:'no number'}, {...valid, client_name:' '}, {...valid, notes:'x'.repeat(1001)}, {...valid, service:'invalid'}]) {
@@ -49,14 +54,24 @@ async function request(body, raw = false) {
     assert.equal((await request({...valid,client_name:'<script>alert("x")</script>',notes:'<img src=x>'})).status, 200);
     assert.equal(sent.length, 2);
     assert.equal(sent[0].replyTo,valid.client_email);
+    assert.equal(sent[1].replyTo,'benedicto@coralshieldmarine.com');
+    assert.equal(sent[1].to,valid.client_email);
+    assert.ok(sent[1].html.includes('https://www.coralshieldmarine.com/logo.png'));
+    assert.ok(!sent[1].html.includes('<script>'));
+    assert.ok(sent[1].html.includes('&lt;script&gt;'));
+    assert.ok(sent[1].html.includes('40 ft Sea Ray'));
+    assert.ok(sent[1].text.includes('Service: Hull cleaning'));
     assert.ok(sent[0].html.includes('&lt;script&gt;'));
     assert.ok(!sent[0].html.includes('<script>'));
     assert.ok(sent[0].html.includes('&lt;img src=x&gt;'));
     assert.equal((await request({...valid,service:'waterfront',boat_details:''})).status, 200);
+    assert.ok(!sent[1].html.includes('>Vessel</td>'));
     const legacy = {...valid}; delete legacy.service; delete legacy.notes;
     assert.equal((await request(legacy)).status, 200);
     failure='notification'; assert.equal((await request(valid)).status, 502); assert.equal(sent.length,1);
     failure='receipt'; assert.equal((await request(valid)).status, 200); assert.equal(sent.length,2);
-    console.log('PASS: validation, malformed/oversized payloads, honeypot, HTML escaping, reply address, waterfront and legacy submissions, provider error, receipt failure, missing key. No emails sent.');
-  } finally { if (original === undefined) delete process.env.RESEND_API_KEY; else process.env.RESEND_API_KEY = original; }
+    failure='receipt-error'; assert.equal((await request(valid)).status, 200); assert.equal(sent.length,2);
+    assert.ok(logged.some(args => String(args[0]).includes('Provider rejected receipt')));
+    console.log('PASS: branded confirmation, customer Reply-To, plain-text alternative, escaping and logged receipt failures;  validation, malformed/oversized payloads, honeypot, HTML escaping, reply address, waterfront and legacy submissions, provider error, receipt failure, missing key. No emails sent.');
+  } finally { console.error = originalConsoleError; if (original === undefined) delete process.env.RESEND_API_KEY; else process.env.RESEND_API_KEY = original; }
 })().catch(error => { console.error(error); process.exit(1); });
