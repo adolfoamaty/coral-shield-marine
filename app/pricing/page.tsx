@@ -1,3 +1,4 @@
+import SocialLinks from "@/components/SocialLinks";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -92,7 +93,7 @@ export default function Pricing() {
 
         <section className={styles.cta}><div className={`${styles.container} ${styles.ctaInner}`}><div><p className={styles.eyebrow}>YOUR BOAT. OUR ATTENTION.</p><h2>Let’s find the right care<br />for your boat.</h2><p>Share your boat’s length, location, and last cleaning date.</p></div><div><Link href="/contact" className={styles.primary}>Request my quote <Arrow /></Link><a href="tel:5616797240">Or call (561) 679-7240</a></div></div></section>
       </main>
-      <footer className={styles.footer}><div className={styles.container}><Link href="/" aria-label="Coral Shield Marine home"><Image src="/logo-white.png" alt="Coral Shield Marine" width={757} height={202} sizes="180px" /></Link><p>© {new Date().getFullYear()} Coral Shield Marine LLC</p><div><Link href="/privacy">Privacy policy</Link><Link href="/terms">Terms of service</Link></div></div></footer>
+      <footer className={styles.footer}><div className={styles.container}><Link href="/" aria-label="Coral Shield Marine home"><Image src="/logo-white.png" alt="Coral Shield Marine" width={757} height={202} sizes="180px" /></Link><p>© {new Date().getFullYear()} Coral Shield Marine LLC</p><div><SocialLinks /><div><Link href="/privacy">Privacy policy</Link><Link href="/terms">Terms of service</Link></div></div></div></footer>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import SocialLinks from "@/components/SocialLinks";
 import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
@@ -62,6 +63,6 @@ export default function PrivacyPolicy() {
       <p>We will update the date above when this policy changes. Where applicable law requires additional notice, we will provide it.</p>
       <p>For privacy questions, contact Coral Shield Marine LLC, Palm Beach County, Florida, at <a href="mailto:benedicto@coralshieldmarine.com">benedicto@coralshieldmarine.com</a> or <a href="tel:+15616797240">(561) 679-7240</a>.</p>
     </section>
-    <div className={styles.footer}><Link href="/">Back to home</Link><Link href="/terms">Terms of service</Link><Link href="/contact">Contact us</Link></div>
+    <div className={styles.footer}><Link href="/">Back to home</Link><Link href="/terms">Terms of service</Link><Link href="/contact">Contact us</Link><SocialLinks /></div>
   </article></main></>;
 }

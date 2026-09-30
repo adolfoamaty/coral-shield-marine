@@ -1,3 +1,4 @@
+import SocialLinks from "@/components/SocialLinks";
 import Image from "next/image";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
@@ -126,7 +127,7 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <footer className={styles.footer}><div className={styles.container}><Link href="/" aria-label="Coral Shield Marine home"><Image src="/logo-white.png" alt="Coral Shield Marine" width={2172} height={724} sizes="180px" /></Link><p>© {new Date().getFullYear()} Coral Shield Marine LLC</p><div><Link href="/privacy">Privacy policy</Link><Link href="/terms">Terms of service</Link></div></div></footer>
+      <footer className={styles.footer}><div className={styles.container}><Link href="/" aria-label="Coral Shield Marine home"><Image src="/logo-white.png" alt="Coral Shield Marine" width={2172} height={724} sizes="180px" /></Link><p>© {new Date().getFullYear()} Coral Shield Marine LLC</p><div><SocialLinks /><div><Link href="/privacy">Privacy policy</Link><Link href="/terms">Terms of service</Link></div></div></div></footer>
     </div>
   );
 }

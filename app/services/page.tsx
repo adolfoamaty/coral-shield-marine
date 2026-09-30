@@ -1,3 +1,4 @@
+import SocialLinks from "@/components/SocialLinks";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -41,7 +42,7 @@ export default function Services() {
         <section className={styles.reports}><div className={`${styles.container} ${styles.reportGrid}`}><div><p className={styles.eyebrow}>PART OF YOUR CLEANING SERVICE</p><h2>See what’s happening<br />below the waterline.</h2></div><div><p>Underwater photos and service notes are included with hull cleaning. You’ll have a record of the work and any maintenance recommendations.</p><ul><li>Hull and running gear condition</li><li>Anode observations</li><li>Notes for your next service</li></ul><p className={styles.reportNote}>Photo coverage depends on underwater visibility and access.</p></div></div></section>
         <section className={styles.next}><div className={`${styles.container} ${styles.nextGrid}`}><div><p className={styles.eyebrow}>PALM BEACH COUNTY, FLORIDA</p><h2>Tell us where you’re docked.</h2><p>Based in Lake Worth, serving local marinas and private docks. We’ll confirm access and service availability for your location.</p><Link href="/#service-area" className={styles.textLink}>View the service area <span aria-hidden="true">→</span></Link></div><div className={styles.nextCard}><h3>Not sure which service you need?</h3><p>Share your vessel details and what you’ve noticed. We’ll discuss the next step.</p><Link href="/contact" className={styles.primary}>Request a quote <span aria-hidden="true">↗</span></Link><a href="tel:5616797240">Or call (561) 679-7240</a></div></div></section>
       </main>
-      <footer className={styles.footer}><div className={styles.container}><Link href="/" aria-label="Coral Shield Marine home"><Image src="/logo-white.png" alt="Coral Shield Marine" width={757} height={202} sizes="180px" /></Link><p>© {new Date().getFullYear()} Coral Shield Marine LLC</p><div><Link href="/privacy">Privacy policy</Link><Link href="/terms">Terms of service</Link></div></div></footer>
+      <footer className={styles.footer}><div className={styles.container}><Link href="/" aria-label="Coral Shield Marine home"><Image src="/logo-white.png" alt="Coral Shield Marine" width={757} height={202} sizes="180px" /></Link><p>© {new Date().getFullYear()} Coral Shield Marine LLC</p><div><SocialLinks /><div><Link href="/privacy">Privacy policy</Link><Link href="/terms">Terms of service</Link></div></div></div></footer>
     </div>
   );
 }
