@@ -54,7 +54,7 @@ export default function QuoteForm() {
         {status === "success" && "Thank you. Your request has been sent. We’ll follow up with pricing and availability."}
         {status === "error" && <>Your request couldn’t be sent. Please try again or <a href="tel:5616797240">call (561) 679-7240</a>.</>}
       </div>
-      <small>By submitting, you agree to be contacted about your request. <a href="/privacy">Privacy policy</a></small>
+      <small>By submitting, you ask us to contact you by email, phone, or text about this request. This does not sign you up for marketing. <a href="/privacy">Privacy policy</a> · <a href="/terms">Terms of service</a></small>
     </form>
   );
 }

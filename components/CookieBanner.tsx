@@ -1,53 +1,49 @@
 "use client";
-import React, { useState, useSyncExternalStore } from 'react';
 
+import { useEffect, useState, useSyncExternalStore } from "react";
+import Link from "next/link";
+import styles from "./CookieBanner.module.css";
+
+const noticeKey = "coral_privacy_notice_v1";
 function subscribe(callback: () => void) {
-  window.addEventListener('storage', callback);
-  window.addEventListener('coral-consent-change', callback);
+  window.addEventListener("storage", callback);
+  window.addEventListener("coral-notice-change", callback);
   return () => {
-    window.removeEventListener('storage', callback);
-    window.removeEventListener('coral-consent-change', callback);
+    window.removeEventListener("storage", callback);
+    window.removeEventListener("coral-notice-change", callback);
   };
 }
 function needsNotice() {
-  try { return !localStorage.getItem('coral_cookie_consent'); } catch { return true; }
+  try { return localStorage.getItem(noticeKey) !== "dismissed"; } catch { return true; }
 }
 function serverNotice() { return false; }
 
 export default function CookieBanner() {
-  const showBanner = useSyncExternalStore(subscribe, needsNotice, serverNotice);
+  const needsDisplay = useSyncExternalStore(subscribe, needsNotice, serverNotice);
   const [dismissed, setDismissed] = useState(false);
-  const acceptCookies = () => {
-    try { localStorage.setItem('coral_cookie_consent', 'true'); } catch { /* Dismiss for this visit if storage is disabled. */ }
+  const [reopened, setReopened] = useState(false);
+  useEffect(() => {
+    const reopen = () => { setDismissed(false); setReopened(true); };
+    window.addEventListener("coral-notice-open", reopen);
+    return () => window.removeEventListener("coral-notice-open", reopen);
+  }, []);
+  function dismiss() {
+    try {
+      localStorage.setItem(noticeKey, "dismissed");
+      localStorage.removeItem("coral_cookie_consent");
+    } catch { /* The notice can still be dismissed for this visit. */ }
     setDismissed(true);
-    window.dispatchEvent(new Event('coral-consent-change'));
-  };
-  if (!showBanner || dismissed) return null;
-
+    setReopened(false);
+    window.dispatchEvent(new Event("coral-notice-change"));
+  }
+  if ((!needsDisplay || dismissed) && !reopened) return null;
   return (
-    <div className="fixed bottom-0 inset-x-0 pb-4 sm:pb-5 z-50">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-xl bg-navy p-4 shadow-2xl border border-teal/20">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            
-            <div className="flex-1">
-              <p className="font-medium text-white text-sm text-center sm:text-left leading-relaxed">
-                We use strictly necessary cookies to ensure our website functions securely. By continuing, you agree to our <a href="/privacy" className="underline text-teal hover:text-coral transition-colors">Privacy Policy</a>.
-              </p>
-            </div>
-            
-            <div className="w-full sm:w-auto flex-shrink-0">
-              <button
-                onClick={acceptCookies}
-                className="w-full sm:w-auto flex items-center justify-center rounded-lg bg-coral px-8 py-2.5 text-sm font-bold text-white hover:bg-teal transition-all shadow-md"
-              >
-                Got it
-              </button>
-            </div>
-            
-          </div>
-        </div>
+    <section className={styles.notice} aria-label="Website privacy notice">
+      <div>
+        <h2>Your privacy on this website</h2>
+        <p>This website does not use optional analytics or advertising cookies. We save your dismissal of this notice in your browser. Read our <Link href="/privacy">privacy policy</Link> for how we handle quote requests and website data.</p>
       </div>
-    </div>
+      <button type="button" onClick={dismiss}>Dismiss notice</button>
+    </section>
   );
 }
