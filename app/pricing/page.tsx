@@ -1,146 +1,98 @@
-import React from 'react';
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import SiteHeader from "@/components/SiteHeader";
+import styles from "./pricing.module.css";
+
+export const metadata: Metadata = {
+  title: "Hull Cleaning Pricing | Coral Shield Marine",
+  description: "Explore Palm Beach County hull cleaning rates, anode replacement costs, and what is included. Request a vessel-specific quote from Coral Shield Marine.",
+};
+
+const included = ["Hull & waterline", "Propellers & shafts", "Trim tabs & running gear", "Anode inspection", "Photos & service notes"];
+const faqs = [
+  ["Which cleaning rate applies to my boat?", "Routine maintenance is for boats on a recurring 3 to 4 week schedule. Initial cleaning or heavier growth starts at the higher rate. Tell us when your boat was last cleaned and what you know about its condition so we can confirm the right service."],
+  ["Are anode replacements included?", "Anode inspection is included with cleaning. Replacement parts and installation are separate charges. The listed rate is $35 for the part and $25 for installation per anode. We’ll confirm the right parts and any replacement charges with your quote."],
+  ["Is the listed price my final quote?", "These are starting rates. Boat length, growth, condition, access, and the service needed help determine your quote. We’ll confirm pricing before scheduling, including any agreed additional work."],
+  ["How often should my hull be cleaned?", "The routine rate is based on a 3 to 4 week recurring schedule. Your boat’s location, coating, use, and growth can affect the right interval. We’ll discuss a schedule suited to your vessel."],
+  ["What if I need recovery or entanglement removal?", "Call or text (561) 679-7240 to discuss the situation. The listed dispatch fee is $150 to $300. Availability, access, conditions, and the scope of the work need to be confirmed before a dive can be scheduled."],
+];
+
+function Arrow() { return <span aria-hidden="true">↗</span>; }
+function Check() { return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m5 12 4 4L19 6" /></svg>; }
 
 export default function Pricing() {
   return (
-    <div className="bg-white min-h-screen font-sans">
-      {/* Navigation Bar */}
-      <header className="absolute inset-x-0 top-0 z-50 bg-white shadow-sm">
-        <nav className="flex items-center justify-between p-6 lg:px-8 max-w-7xl mx-auto" aria-label="Global">
-          <div className="flex lg:flex-1">
-            <a href="/" className="-m-1.5 p-1.5 flex items-center gap-2">
-              <span className="sr-only">Coral Shield Marine</span>
-              <img src="/logo.png" alt="Coral Shield Marine Logo" className="h-10 w-auto" />
-            </a>
+    <div className={styles.page}>
+      <SiteHeader />
+      <main id="main-content" tabIndex={-1}>
+        <section className={styles.hero}>
+          <div className={styles.container}>
+            <Link href="/" className={styles.back}><span aria-hidden="true">←</span> Back to home</Link>
+            <p className={styles.eyebrow}>PRICING & WHAT’S INCLUDED</p>
+            <h1>Clear pricing.<br /><span>Care you can count on.</span></h1>
+            <p className={styles.intro}>Know where your maintenance cost starts. We’ll confirm the right service and a quote for your boat before scheduling.</p>
+            <div className={styles.heroActions}><Link href="/contact" className={styles.primary}>Request my quote <Arrow /></Link><a href="#cleaning" className={styles.textLink}>Explore the rates <span aria-hidden="true">↓</span></a></div>
           </div>
-          <div className="hidden lg:flex lg:gap-x-12">
-            <a href="/#services" className="text-sm font-semibold leading-6 text-navy hover:text-teal transition-colors">Services</a>
-            <a href="/pricing" className="text-sm font-bold leading-6 text-coral">Pricing & Process</a>
-          </div>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a href="/#contact" className="text-sm font-bold leading-6 text-navy hover:text-teal transition-colors">
-              Book a Dive <span aria-hidden="true">&rarr;</span>
-            </a>
-          </div>
-        </nav>
-      </header>
+        </section>
 
-      {/* Pricing Hero */}
-      <div className="relative isolate px-6 pt-32 lg:px-8 bg-light pb-16 border-b border-navy/10">
-        <div className="mx-auto max-w-3xl text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-navy sm:text-5xl">
-            Transparent, Premium Pricing
-          </h1>
-          <p className="mt-6 text-lg leading-8 text-navy/80 font-medium">
-            No hidden fees, no subcontracting shortcuts. You pay for absolute precision, restored fuel efficiency, and 100% owner-operator accountability.
-          </p>
-        </div>
-      </div>
-
-      {/* Pricing Tables Section */}
-      <div className="py-24 sm:py-32 bg-white">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 max-w-5xl mx-auto">
-            
-            {/* Hull Cleaning Rates */}
-            <div className="bg-navy rounded-3xl p-8 sm:p-10 shadow-2xl relative overflow-hidden border-t-4 border-coral">
-              <h3 className="text-2xl font-bold text-white mb-2">Hull & Running Gear</h3>
-              <p className="text-light/70 text-sm mb-8">Billed per linear foot. Includes waterline, hull, shafts, props, and trim tabs.</p>
-              
-              <ul className="space-y-6">
-                <li className="flex justify-between items-center border-b border-white/10 pb-6">
-                  <div>
-                    <p className="text-lg font-bold text-white">Standard Maintenance</p>
-                    <p className="text-sm text-teal mt-1">3 to 4 week recurring schedule</p>
-                  </div>
-                  <p className="text-2xl font-black text-white">$3.00<span className="text-sm font-normal text-light/60">/ft</span></p>
-                </li>
-                <li className="flex justify-between items-center border-b border-white/10 pb-6">
-                  <div>
-                    <p className="text-lg font-bold text-white">Heavy Growth / Initial Clean</p>
-                    <p className="text-sm text-coral mt-1">Neglected hulls & heavy barnacles</p>
-                  </div>
-                  <p className="text-2xl font-black text-white">$5.00<span className="text-sm font-normal text-light/60">/ft</span></p>
-                </li>
-              </ul>
+        <section id="cleaning" className={styles.section}>
+          <div className={styles.container}>
+            <div className={styles.heading}><div><p className={styles.eyebrow}>HULL & RUNNING GEAR</p><h2>The right clean.<br />For your boat’s condition.</h2></div><p>Rates are based on boat length. Choose recurring care for regular upkeep, or an initial clean when your hull needs more attention.</p></div>
+            <div className={styles.rateGrid}>
+              <article className={`${styles.rateCard} ${styles.routine}`}>
+                <div className={styles.cardHeading}><span>01 / ROUTINE CARE</span><span className={styles.badge}>Recurring service</span></div>
+                <h3>Keep your hull ready.</h3><p>Regular maintenance on a 3 to 4 week schedule.</p>
+                <div className={styles.rate}><small>Starting at</small><strong>$3.00<span> / ft</span></strong></div>
+                <div className={styles.example}><span>Example: 40 ft boat</span><strong>$120 per cleaning</strong></div>
+                <Link href="/contact" className={styles.primary}>Request routine maintenance <Arrow /></Link>
+              </article>
+              <article className={styles.rateCard}>
+                <div className={styles.cardHeading}><span>02 / INITIAL CLEAN</span><span className={styles.badge}>Heavy growth</span></div>
+                <h3>Give your hull a fresh start.</h3><p>For a first service or more established marine growth.</p>
+                <div className={styles.rate}><small>Starting at</small><strong>$5.00<span> / ft</span></strong></div>
+                <div className={styles.example}><span>Example: 40 ft boat</span><strong>$200 per cleaning</strong></div>
+                <Link href="/contact" className={styles.secondary}>Request an initial cleaning <Arrow /></Link>
+              </article>
             </div>
+            <p className={styles.note}>Examples use the starting rate only. Vessel condition and additional services may affect your quote. Anode replacement is separate.</p>
+            <div className={styles.included}><h3>Included with your cleaning</h3><ul>{included.map(item => <li key={item}><Check />{item}</li>)}</ul></div>
+          </div>
+        </section>
 
-            {/* Hardware & Emergency Rates */}
-            <div className="bg-white rounded-3xl p-8 sm:p-10 shadow-xl border border-navy/10 relative overflow-hidden">
-              <h3 className="text-2xl font-bold text-navy mb-2">Zincs & Emergency Services</h3>
-              <p className="text-navy/60 text-sm mb-8">Asset protection and rapid Lake Worth dispatch.</p>
-              
-              <ul className="space-y-6">
-                <li className="flex justify-between items-center border-b border-navy/5 pb-6">
-                  <div>
-                    <p className="text-lg font-bold text-navy">Zinc Anode Part</p>
-                    <p className="text-sm text-navy/60 mt-1">Premium mil-spec anodes</p>
-                  </div>
-                  <p className="text-xl font-bold text-navy">$35.00<span className="text-sm font-normal text-navy/60">/ea</span></p>
-                </li>
-                <li className="flex justify-between items-center border-b border-navy/5 pb-6">
-                  <div>
-                    <p className="text-lg font-bold text-navy">Underwater Installation</p>
-                    <p className="text-sm text-navy/60 mt-1">Labor fee per zinc replaced</p>
-                  </div>
-                  <p className="text-xl font-bold text-navy">$25.00<span className="text-sm font-normal text-navy/60">/ea</span></p>
-                </li>
-                <li className="flex justify-between items-center border-b border-navy/5 pb-6">
-                  <div>
-                    <p className="text-lg font-bold text-navy">Emergency Recovery</p>
-                    <p className="text-sm text-navy/60 mt-1">Dropped items or prop entanglements</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-xl font-bold text-navy">$150 - $300</p>
-                    <p className="text-xs text-coral mt-1">Flat Dispatch Fee</p>
-                  </div>
-                </li>
-              </ul>
+        <section className={`${styles.section} ${styles.extras}`}>
+          <div className={`${styles.container} ${styles.extrasGrid}`}>
+            <div><p className={styles.eyebrow}>ADDITIONAL SERVICES</p><h2>A little more care.<br />Clearly priced.</h2><p className={styles.body}>Replacement anodes and recovery work are priced separately from hull cleaning. We’ll discuss what your boat needs before proceeding.</p><div className={styles.anodeExample}><span className={styles.miniLabel}>ONE ANODE, REPLACED</span><p><strong>$35</strong> part <span aria-hidden="true">+</span> <strong>$25</strong> installation</p><div><strong>$60</strong><span>Listed total per anode</span></div></div></div>
+            <div className={styles.extraPanel}>
+              <div className={styles.extraRow}><div><h3>Anode part</h3><p>Replacement sacrificial anode</p></div><strong>$35<span> / each</span></strong></div>
+              <div className={styles.extraRow}><div><h3>Underwater installation</h3><p>Labor for each anode replaced</p></div><strong>$25<span> / each</span></strong></div>
+              <div className={styles.extraRow}><div><h3>Recovery / entanglement</h3><p>Listed dispatch fee; scope confirmed separately</p></div><strong>$150–$300</strong></div>
+              <div className={styles.callout}><p>Need help with a dropped item or fouled propeller?</p><a href="tel:5616797240">Call (561) 679-7240 <Arrow /></a><small>Availability and dive conditions must be confirmed.</small></div>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
 
-      {/* The 4-Step Process */}
-      <div className="bg-light py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl lg:text-center mb-16">
-            <h2 className="text-base font-semibold leading-7 text-teal">Our Methodology</h2>
-            <p className="mt-2 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
-              The Owner-Operator Standard
-            </p>
+        <section className={styles.section}>
+          <div className={styles.container}>
+            <div className={styles.heading}><div><p className={styles.eyebrow}>BEFORE, DURING & AFTER</p><h2>More than a clean hull.</h2></div><p>A clear plan before the dive, care during the service, and a record of what was done.</p></div>
+            <div className={styles.processGrid}>{[
+              ["01", "Confirm your service", "Share your vessel details and location. We’ll discuss its condition, agree on the scope, and confirm your quote."],
+              ["02", "Care for your vessel", "We assess the hull and coating, choose suitable cleaning methods, and check the condition of your anodes."],
+              ["03", "Review the results", "Receive underwater photos and service notes, with recommendations for your next cleaning or replacement needs."],
+            ].map(([num,title,text]) => <article key={num}><span className={styles.step}>{num}</span><h3>{title}</h3><p>{text}</p></article>)}</div>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            <div className="bg-white p-8 rounded-2xl shadow-md border border-navy/5">
-              <div className="h-12 w-12 rounded-full bg-navy text-white flex items-center justify-center font-black text-xl mb-6">1</div>
-              <h4 className="text-lg font-bold text-navy mb-2">Pre-Dive Inspection</h4>
-              <p className="text-sm text-navy/70 leading-relaxed">We assess your hull coating condition before touching the paint to ensure zero damage to fragile anti-fouling layers.</p>
-            </div>
-            <div className="bg-white p-8 rounded-2xl shadow-md border border-navy/5">
-              <div className="h-12 w-12 rounded-full bg-teal text-white flex items-center justify-center font-black text-xl mb-6">2</div>
-              <h4 className="text-lg font-bold text-navy mb-2">Gentle Abrasion</h4>
-              <p className="text-sm text-navy/70 leading-relaxed">We use soft pads for fiberglass slime and reserve rigid metal scrapers strictly for the bronze propellers and shafts.</p>
-            </div>
-            <div className="bg-white p-8 rounded-2xl shadow-md border border-navy/5">
-              <div className="h-12 w-12 rounded-full bg-coral text-white flex items-center justify-center font-black text-xl mb-6">3</div>
-              <h4 className="text-lg font-bold text-navy mb-2">Zinc Assessment</h4>
-              <p className="text-sm text-navy/70 leading-relaxed">Running gear anodes are meticulously checked. If they are 50% depleted, we replace them immediately.</p>
-            </div>
-            <div className="bg-white p-8 rounded-2xl shadow-md border border-navy/5">
-              <div className="h-12 w-12 rounded-full bg-navy text-white flex items-center justify-center font-black text-xl mb-6">4</div>
-              <h4 className="text-lg font-bold text-navy mb-2">Photo Reporting</h4>
-              <p className="text-sm text-navy/70 leading-relaxed">You receive high-resolution post-dive photos of your clean running gear and zinc levels so you never have to guess.</p>
-            </div>
-          </div>
-          
-          <div className="mt-16 text-center">
-            <a href="/#contact" className="inline-block rounded-md bg-coral px-8 py-4 text-lg font-bold text-white shadow-lg hover:bg-teal transition-all duration-300 transform hover:-translate-y-1">
-              Request Your Dive Quote Now
-            </a>
-          </div>
-        </div>
-      </div>
+        </section>
 
+        <section className={`${styles.section} ${styles.faq}`}>
+          <div className={`${styles.container} ${styles.faqGrid}`}>
+            <div><p className={styles.eyebrow}>A FEW COMMON QUESTIONS</p><h2>Before you book.</h2><p className={styles.body}>Have a question about your specific boat? You can speak directly with Benedicto.</p><a href="tel:5616797240" className={styles.textLink}>Let’s talk <Arrow /></a></div>
+            <div className={styles.questions}>{faqs.map(([question,answer]) => <details key={question}><summary>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</div>
+          </div>
+        </section>
+
+        <section className={styles.cta}><div className={`${styles.container} ${styles.ctaInner}`}><div><p className={styles.eyebrow}>YOUR BOAT. OUR ATTENTION.</p><h2>Let’s find the right care<br />for your boat.</h2><p>Share your boat’s length, location, and last cleaning date.</p></div><div><Link href="/contact" className={styles.primary}>Request my quote <Arrow /></Link><a href="tel:5616797240">Or call (561) 679-7240</a></div></div></section>
+      </main>
+      <footer className={styles.footer}><div className={styles.container}><Link href="/" aria-label="Coral Shield Marine home"><Image src="/logo-white.png" alt="Coral Shield Marine" width={757} height={202} sizes="180px" /></Link><p>© {new Date().getFullYear()} Coral Shield Marine LLC</p><div><Link href="/privacy">Privacy policy</Link><Link href="/terms">Terms of service</Link></div></div></footer>
     </div>
   );
 }

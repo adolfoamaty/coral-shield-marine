@@ -1,0 +1,21 @@
+.form { background: #fff; color: #01395f; padding: 36px; border-radius: 12px; }
+.form h3 { font-size: 25px; font-weight: 650; letter-spacing: -.7px; }
+.form > p { margin: 8px 0 28px; font-size: 14px; color: #526979; }
+.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 16px; }
+.fields label { min-width: 0; font-size: 12px; font-weight: 600; display: grid; gap: 7px; }
+.wide { grid-column: 1 / -1; }
+.fields input, .fields select, .fields textarea { width: 100%; min-width: 0; border: 1px solid #d8e2e8; padding: 12px; border-radius: 5px; font-size: 14px; font-weight: 400; color: #01395f; background: #fbfcfd; }
+.fields input::placeholder { color: #6c7e8a; }
+.fields input:focus-visible, .fields select:focus-visible, .fields textarea:focus-visible { outline: 2px solid #066196; outline-offset: 2px; }
+.form button { width: 100%; display: flex; justify-content: space-between; background: #ff573e; color: #fff; font-size: 14px; font-weight: 650; border-radius: 5px; padding: 15px 20px; margin-top: 24px; }
+.form button:hover { background: #c93d29; }
+.form button:disabled { opacity: .7; cursor: default; }
+.form button:focus-visible { outline: 3px solid #066196; outline-offset: 3px; }
+.status { font-size: 13px; line-height: 1.6; margin-top: 12px; }
+.status a, .form small a { text-decoration: underline; }
+.form small { display: block; font-size: 10px; line-height: 1.7; color: #526979; margin-top: 14px; }
+@media (max-width: 600px) { .form { padding: 24px; } .fields { grid-template-columns: 1fr; } }
+
+.fields textarea { resize: vertical; }
+.optional { color: #526979; font-weight: 400; font-size: 10px; }
+.trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }

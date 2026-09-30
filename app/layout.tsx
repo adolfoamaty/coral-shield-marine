@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Coral Shield Marine | Palm Beach Underwater Hull Cleaning",
-  description: "Premium underwater hull cleaning, zinc replacement, and running gear defense for Palm Beach County.",
+  description: "Owner-operated underwater hull cleaning, running gear care, and anode replacement in Palm Beach County. Explore pricing and request a quote.",
 };
 
 export default function RootLayout({

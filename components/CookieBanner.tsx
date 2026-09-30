@@ -1,23 +1,28 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useSyncExternalStore } from 'react';
+
+function subscribe(callback: () => void) {
+  window.addEventListener('storage', callback);
+  window.addEventListener('coral-consent-change', callback);
+  return () => {
+    window.removeEventListener('storage', callback);
+    window.removeEventListener('coral-consent-change', callback);
+  };
+}
+function needsNotice() {
+  try { return !localStorage.getItem('coral_cookie_consent'); } catch { return true; }
+}
+function serverNotice() { return false; }
 
 export default function CookieBanner() {
-  const [showBanner, setShowBanner] = useState(false);
-
-  useEffect(() => {
-    // Check if the user already accepted cookies
-    const consent = localStorage.getItem('coral_cookie_consent');
-    if (!consent) {
-      setShowBanner(true);
-    }
-  }, []);
-
+  const showBanner = useSyncExternalStore(subscribe, needsNotice, serverNotice);
+  const [dismissed, setDismissed] = useState(false);
   const acceptCookies = () => {
-    localStorage.setItem('coral_cookie_consent', 'true');
-    setShowBanner(false);
+    try { localStorage.setItem('coral_cookie_consent', 'true'); } catch { /* Dismiss for this visit if storage is disabled. */ }
+    setDismissed(true);
+    window.dispatchEvent(new Event('coral-consent-change'));
   };
-
-  if (!showBanner) return null;
+  if (!showBanner || dismissed) return null;
 
   return (
     <div className="fixed bottom-0 inset-x-0 pb-4 sm:pb-5 z-50">

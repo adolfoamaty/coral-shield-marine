@@ -4,3 +4,6 @@ html {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+}
